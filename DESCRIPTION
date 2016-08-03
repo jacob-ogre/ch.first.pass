@@ -1,16 +1,24 @@
 Package: ch.first.pass
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Analysis of critical habitat changes 2001-2011
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: person("Jacob", "Malcom",
+                  email = "jmalcom@defenders.org",
+                  role = c("aut", "cre"))
+Description: Critical habitat was designated for ~130 species before 2001.
+    Here we evaluate critical habitat changes for 42 species of these species
+    using the National Land Cover Database (NLCD) data for 2001 and 2011. This
+    is a working 'paper' in-progress, not a final analysis.
+Depends:
+    R (>= 3.2.3)
+License: BSD_2_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests:
-    knitr,
+RoxygenNote: 5.0.1
+Imports:
+    dplyr,
+    plotly,
+    stringr
+Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1

@@ -4,7 +4,7 @@
 \alias{make_heatmap}
 \title{Create a plotly heatmap of habitat changes}
 \usage{
-make_heatmap(df, species = "", title = "")
+make_heatmap(df, species = "", title = "", height = NULL)
 }
 \arguments{
 \item{species}{The name of the species to plot}
