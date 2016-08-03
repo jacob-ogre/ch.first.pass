@@ -4,3 +4,5 @@
 .Ruserdata
 */*.xlsx
 inst/doc
+*/*.html
+*/*.jpeg
