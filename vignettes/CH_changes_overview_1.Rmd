@@ -59,7 +59,11 @@ Reds are classified as development of varying intensity; shades of brown and gra
 
 ### Species selection
 
+TBD
+
 ### NLCD
+
+TBD
 
 ## Results
 
@@ -190,6 +194,10 @@ To see which habitat was converted to which habitat, we can create a heatmap. No
 ```{r five, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE}
 make_heatmap(all_sp, "", "All species")
 ```
+
+## Discussion
+
+TBD
 
 ## Appendix
 
