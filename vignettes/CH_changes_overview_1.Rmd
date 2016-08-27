@@ -2,7 +2,6 @@
 title: "Working paper: Habitat changes in designated critical habitat, 2001-2011"
 author: "Ryan Covington, Jacob Malcom, and Ya-Wei Li"
 date: "`r Sys.Date()`"
-runtime: shiny
 output: 
   rmarkdown::html_document:
     fig_caption: yes
