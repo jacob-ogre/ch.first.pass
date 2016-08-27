@@ -1,7 +1,8 @@
 ---
-title: "Changes of designated critical habitat, 2001-2011"
+title: "Working paper: Habitat changes in designated critical habitat, 2001-2011"
 author: "Ryan Covington, Jacob Malcom, and Ya-Wei Li"
 date: "`r Sys.Date()`"
+runtime: shiny
 output: 
   rmarkdown::html_document:
     fig_caption: yes
@@ -9,6 +10,8 @@ output:
     toc_depth: 3
     toc_float: true
 ---
+
+<script async defer src="https://hypothes.is/embed.js"></script>
 
 ```{r setup, include = FALSE}
 library(ch.first.pass)
@@ -24,15 +27,85 @@ all_sp <- dplyr::select(all_sp, -from_to, -Count)
 #   %\VignetteEncoding{UTF-8}
 ```
 
-## Abstract
+<hr>
 
-TBD
+*As with all of our working papers, this is a __preliminary analysis__. The results described here should __not__ be used to claim that critical habitat designation does or does not work: this a __starting point__ only.*
 
-## Introduction
+<hr>
 
-TBD
+## Background
 
-#### Mount Graham red squirrel habitats in 2001 (top) and in 2011 (bottom) after the large wildfires of 2004.
+Critical habitat occupies a contentious position in endangered species policy
+(see, e.g., [James and Ward 2016](http://heinonline.org/HOL/LandingPage?handle=hein.journals/uclalp34&div=4&id=&page=)).  Although much has been written about the
+intent, scope, and effectiveness of critical habitat designations ([Gibbs and Currie 2012](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0035730); [Mullen, Peterson and Todd 2013](https://www.researchgate.net/profile/Kaitlyn_Mullen/publication/257163227_Has_designating_and_protecting_critical_habitat_had_an_impact_on_endangered_North_Atlantic_right_whale_ship_strike_mortality/links/54de0d2b0cf22a26721e2690.pdf); [Nelson et al. 2015](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.717.6236&rep=rep1&type=pdf); [Taylor, Suckling and Rachlinski 2005](http://bioscience.oxfordjournals.org/content/55/4/360.full)), very little is known about its current ecological
+condition. This knowledge gap makes it difficult, if not impossible, to
+understand whether the U.S. Fish and Wildlife Service (FWS) is adequately
+protecting critical habitat or the extent to which critical habitat is
+furthering recovery. 
+
+In this working document, we test the hypothesis that
+remotely-sensed data--particularly the National Land Cover Database (NLCD)--can
+help close this pervasive knowledge gap by providing estimates of the extent of
+habitat changes over a 10-year period within designated critical habitat. 
+Using a set of 42 ESA-listed species with critical habitat
+designated before 2000, we calculate the change in acreage of potentially
+suitable land cover types during the period 2001-2011. We expect that high rates
+of land cover change and declining species status signal inadequate protection
+of critical habitat, and may reveal instances of "destruction or adverse
+modification." Conversely, we expect that low rates of land cover conversion and
+high species recovery indicate appropriate levels of protection. Our 
+_preliminary results_ indicate that most of the 42 listed species have not 
+witnessed significant critical habitat losses during the study period. 
+
+## Methods
+
+To test our hypothesis, we first created a list of all ESA-listed species with
+critical habitat designated before 2001. Because of the complexities of linking
+land cover changes to aquatic critical habitat, we eliminated fishes from the 
+list. Last, we removed species for which habitat disturbance was not the primary 
+threat to their recovery, e.g., wolves (threatened by hunting) and condors 
+(threatened by lead). The filtered list of 42 species with critical habitat 
+designated before 2000 included plants, invertebrates, mammals, birds, and herps.
+
+We used only publicly available data for our analyses, including:
+
+- critical habitat, provided by the Fish and Wildlife Service through its
+Environmental Conservation Online System, [ECOS](http://ecos.fws.gov)); and 
+
+- the  National Land Cover Database (NLCD) provided by the Multi-Resolution Land 
+Characteristics Consortium, [MRLC](http://www.mrlc.gov/finddata.php)). 
+
+Within the NLCD, we used several products, including: 
+
+- 2001 Land Cover (2011 edition), 
+
+- 2001 Percent Developed Imperviousness (2011 editon), 
+
+- 2011 Land Cover, 
+
+- 2011 Percent Developed Imperviousness, and 
+
+- 2001-2011 Land Cover From To Change Index. 
+
+We made a geodatabase of critical habitat with a seperate feature
+class for each of our 42 case study species. Using ArcGIS Model Builder, we
+clipped each of the NLCD products to each of the feature classes (i.e., 5
+rasters for each of our case study species). For the land cover products, we
+used arcpy scripts to calculate the percent cover (2001 and 2011), the total
+acreage change, and the percent acreage change of each land cover type for each
+feature class. For the percent developed imperviousness, we used arcpy scripts
+to calculate the total number of acres with > 50% developed imperviousness
+for 2001 and 2011 for each of our 42 species. Those numbers were used to
+calculate total and percent acreage change in imperviousness.
+
+## Results
+
+To provide context, we first present two examples of the NLCD layers within 
+polygons of designated critical habitat:
+
+<hr>
+
+##### Ex. 1. Mount Graham red squirrel habitats in 2001 (top) and in 2011 (bottom) after the large wildfires of 2004.
 
 Green is evergreen forest; tan and whitish are shrub/scrub and grassland.
 
@@ -43,9 +116,10 @@ Green is evergreen forest; tan and whitish are shrub/scrub and grassland.
 
 <hr>
 
-#### Least Bell's Vireo habitat in CH in 2001 (top), 2011 (middle), and the change in habitats from 2001-2011.
+##### Ex. 2. Least Bell's Vireo habitat in CH in 2001 (top), 2011 (middle), and the change in habitats from 2001-2011 (bottom).
 
-Reds are classified as development of varying intensity; shades of brown and gray are 'natural' habitat.
+Reds are classified as development of varying intensity; shades of brown and
+gray are 'natural' habitat.
 
 ![](LBV_01_small.jpeg)
 <br>
@@ -55,19 +129,7 @@ Reds are classified as development of varying intensity; shades of brown and gra
 <br>
 ![](LBV_FT_small.jpeg)
 
-## Methods
-
-### Species selection
-
-TBD
-
-### NLCD
-
-TBD
-
-## Results
-
-TBD
+<hr>
 
 ### _Species_
 
@@ -93,9 +155,12 @@ by_spp$chg_pct <- (by_spp$chg_by_sp / by_spp$sp_total) * 100
 by_spp <- arrange(by_spp, desc(chg_pct))
 ```
 
-The percentage of critical habitat that changed from one NLCD class to another ranged from `r round(min(by_spp$chg_pct, na.rm = TRUE), digits = 1)` to `r round(max(by_spp$chg_pct, na.rm = TRUE), digits = 1)` per species. The average amount of change was `r round(mean(by_spp$chg_pct, na.rm = TRUE), digits = 1)`% (median = `r round(median(by_spp$chg_pct, na.rm = TRUE), digits = 1)`%).
+The percentage of critical habitat that changed from one NLCD class to another
+ranged from `r round(min(by_spp$chg_pct, na.rm = TRUE), digits = 1)` to `r round(max(by_spp$chg_pct, na.rm = TRUE), digits = 1)` per species. The average
+amount of change was `r round(mean(by_spp$chg_pct, na.rm = TRUE), digits = 1)`%
+(median = `r round(median(by_spp$chg_pct, na.rm = TRUE), digits = 1)`%). 
 
-```{r two, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE}
+```{r two, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE }
 plot_a <- plot_ly(data = by_spp,
                   x = by_spp$Species,
                   y = by_spp$chg_pct, 
@@ -120,22 +185,37 @@ plot_b <- plot_ly(by_spp,
 htmltools::tagList(list(plot_a, plot_b))
 ```
 
-The proportions of habitat transitions varies by species. For example, the Mt. Graham red squirrel had the largest proportion of its habitat change, primarily because of a [[year]] fire
+#### _Note_
+The habitat changes for the three species with the highest percentage 
+change are mostly attributable to fires. Some of the changes within the Amargosa 
+vole (#4, by percent) habitat are beneficial, e.g., shrub/scrub to emergent 
+wetland vegetation.
+
+<hr>
+
+The proportions of habitat transitions varies by species. For example, the Mt.
+Graham red squirrel had the largest proportion of its habitat change, primarily
+because of large fire in 2004:
 
 ```{r sp_squirrel, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE}
 make_heatmap(all_sp, "MountGrahamRedSquirrel", "MountGrahamRedSquirrel")
 ```
 
-Whooping crane, which saw 3%, or >11,000 acres, of habitat change within critical habitat:
+Whooping crane, which saw 3%, or >11,000 acres, of habitat change within
+critical habitat:
 
 ```{r sp_whcr, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE}
 make_heatmap(all_sp, "WhoopingCrane", "WhoopingCrane")
 ```
 
+We include the from:to habitat transitions for all 42 species evaluated in an
+[Appendix](#appendix).
 
 ### _Habitats_
 
-We next asked if there were systematic habitat transitions across species. MORE
+We next asked if there were systematic habitat transitions across species.
+_Note_ that the percentages are calculated over the area within CH designations,
+not the total extent of the habitat type in the US.
 
 ```{r three, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE}
 all_hab <- tapply(all_sp$Acres,
@@ -189,19 +269,24 @@ htmltools::tagList(list(plot_a, plot_b))
 
 ```
 
-To see which habitat was converted to which habitat, we can create a heatmap. Note that the acres are log10-transformed because the area of `shrub/scrub` is so large relative to other areas:
+To see which habitat was converted to which habitat, we can create a heatmap. 
+Note that the acres are log10-transformed because the area of `shrub/scrub` is 
+so large relative to other areas:
 
 ```{r five, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE}
 make_heatmap(all_sp, "", "All species")
 ```
 
-## Discussion
+<hr>
 
-TBD
+**We leave this working paper here - without a Discussion - because the results are incomplete. We will update this document as we collect and analyze more data in 2017.**
+
+<hr>
 
 ## Appendix
 
-To facilitate species-by-species evaluation of habitat changes, we provide 'from:to' heatmaps for each of the 42 species in the dataset:
+To facilitate species-by-species evaluation of habitat changes, we provide
+'from:to' heatmaps for each of the 42 species in the dataset:
 
 ```{r appendix_spp, echo=FALSE, fig.width=7, fig.height=210, warning=FALSE}
 plots <- list()

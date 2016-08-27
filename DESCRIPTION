@@ -2,9 +2,10 @@ Package: ch.first.pass
 Type: Package
 Title: Analysis of critical habitat changes 2001-2011
 Version: 0.1.0
-Authors@R: person("Jacob", "Malcom",
-                  email = "jmalcom@defenders.org",
-                  role = c("aut", "cre"))
+Authors@R: c(
+    person("Ryan", "Covington", email = "rcovington@defenders.org", role = c("aut")),
+    person("Jacob", "Malcom", email = "jmalcom@defenders.org", role = c("aut", "cre")),
+    person("Ya-Wei", "Li", email = "yli@defenders.org", role = c("aut")))
 Description: Critical habitat was designated for ~130 species before 2001.
     Here we evaluate critical habitat changes for 42 species of these species
     using the National Land Cover Database (NLCD) data for 2001 and 2011. This
@@ -18,6 +19,7 @@ RoxygenNote: 5.0.1
 Imports:
     dplyr,
     plotly,
+    shiny,
     stringr
 Suggests: knitr,
     rmarkdown
