@@ -19,8 +19,8 @@ RoxygenNote: 5.0.1
 Imports:
     dplyr,
     plotly,
-    shiny,
-    stringr
+    stringr,
+    vegan
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
