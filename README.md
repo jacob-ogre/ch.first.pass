@@ -1,6 +1,6 @@
 ## Code for _Habitat changes in designated critical habitat, 2001-2011_
 
-This repo contains the code for [a working 'paper']((https://defend-esc-dev.org/working_papers/CH_changes_v0-1.html)) examining critical habitat changes inferred from the [National Land Cover Database](http://www.mrlc.gov). The repo is an R package that can be installed using:
+This repo contains the code for [a working paper](https://defend-esc-dev.org/working_papers/CH_changes_v0-1.html) examining critical habitat changes inferred from the [National Land Cover Database](http://www.mrlc.gov). The repo is an R package that can be installed using:
 
 `devtools::install_github("Defenders-ESC/ch.first.pass")`
 
