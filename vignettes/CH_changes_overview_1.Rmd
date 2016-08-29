@@ -2,6 +2,7 @@
 title: "Working paper: Habitat changes in designated critical habitat, 2001-2011"
 author: "Ryan Covington, Jacob Malcom, and Ya-Wei Li"
 date: "`r Sys.Date()`"
+runtime: shiny
 output: 
   rmarkdown::html_document:
     fig_caption: yes
@@ -16,6 +17,7 @@ output:
 library(ch.first.pass)
 library(dplyr)
 library(plotly)
+library(shiny)
 library(stringr)
 library(viridis)
 data("all_sp")
@@ -111,7 +113,13 @@ polygons of designated critical habitat:
 
 Green is evergreen forest; tan and whitish are shrub/scrub and grassland.
 
-![](MGRS_01_small.jpeg)
+![red_squirrel_01](www/MGRS_01_small.jpeg)
+
+```{r echo = FALSE}
+renderImage(list(src = "MGRS_01_small.jpeg", 
+                 alt = "red squirrel CH image"),
+            deleteFile = FALSE)
+```
 <br>
 <br>
 ![](MGRS_11_small.jpeg)
@@ -184,6 +192,7 @@ plot_b <- plot_ly(by_spp,
 # subplot(plot_a, plot_b, margin = 0.05, nrows = 2) %>% 
 #     layout(title = "CH changes by percent (top) and area (bottom)", 
 #            showlegend = FALSE)
+renderPlotly(list(plot_a, plot_b))
 htmltools::tagList(list(plot_a, plot_b))
 ```
 
@@ -300,15 +309,31 @@ larger  changes from types that are not suitable for a species to types that are
 suitable. Forthcoming work will focus on calculating the amount of 'good' and 
 'bad' changes for each species.
 
-```{r appendix_spp, echo=FALSE, fig.width=7, fig.height=210, warning=FALSE}
-plots <- list()
-un_sp <- unique(all_sp$Species)
-for(i in 1:length(un_sp)) {
-  plots[[i]] <- make_heatmap(all_sp,
-                             species = un_sp[i],
-                             title = un_sp[i],
-                             height = 600)
-}
-htmltools::tagList(plots)
+```{r appendix_spp, echo=FALSE, fig.width=7, fig.height=7, warning=FALSE}
+selectInput(inputId = "species_sel",
+            label = "Choose a species",
+            choices = unique(all_sp$Species))
+
+cur_sp <- reactive({
+  input$species_sel
+})
+
+renderPlotly({
+  sub_dat <- dplyr::filter(all_sp, Species == cur_sp())
+  make_heatmap(sub_dat,
+               species = cur_sp(),
+               title = cur_sp(),
+               height = 800)
+})
+
+# plots <- list()
+# un_sp <- 
+# for(i in 1:length(un_sp)) {
+#   plots[[i]] <- make_heatmap(all_sp,
+#                              species = un_sp[i],
+#                              title = un_sp[i],
+#                              height = 600)
+# }
+# htmltools::tagList(plots)
 ```
 
